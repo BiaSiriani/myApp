@@ -10,7 +10,12 @@ import { DiarioService } from '../services/diario.service';
 export class PerigosPage implements OnInit {
   perigos: any[] = [];
   mostrarFormulario = false;
-  novoPerigo = {
+  novoPerigo: {
+    nome: string;
+    nivel: 'baixo' | 'medio' | 'alto' | 'critico';
+    tipo: string;
+    descricao: string;
+  } = {
     nome: '',
     nivel: 'baixo',
     tipo: '',
