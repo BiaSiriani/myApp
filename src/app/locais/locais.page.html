@@ -1,0 +1,109 @@
+<ion-header [translucent]="true">
+    <ion-toolbar color="dark">
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="/home" text="" color="success"></ion-back-button>
+      </ion-buttons>
+      <ion-title class="terminal-title">
+        <div class="title-container">
+          <h2>LOCAIS IMPORTANTES</h2>
+          <p>{{ locais.length }} locais mapeados</p>
+        </div>
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content [fullscreen]="true" color="dark">
+    <div class="page-container">
+      <ion-button 
+        *ngIf="!mostrarFormulario"
+        expand="block" 
+        (click)="toggleFormulario()" 
+        class="add-button">
+        <ion-icon name="add-circle-outline" slot="start"></ion-icon>
+        MAPEAR LOCAL
+      </ion-button>
+  
+      <ion-card *ngIf="mostrarFormulario" class="form-card">
+        <ion-card-content>
+          <ion-item color="dark">
+            <ion-input 
+              label="Nome do local" 
+              labelPlacement="floating"
+              [(ngModel)]="novoLocal.nome"
+              placeholder="Ex: Bunker Abandonado">
+            </ion-input>
+          </ion-item>
+  
+          <ion-item color="dark">
+            <ion-select 
+              label="Tipo de local" 
+              labelPlacement="floating"
+              [(ngModel)]="novoLocal.tipo"
+              interface="action-sheet">
+              <ion-select-option value="abrigo">Abrigo Improvisado</ion-select-option>
+              <ion-select-option value="tunel">Túnel Seguro</ion-select-option>
+              <ion-select-option value="contaminada">Área Contaminada</ion-select-option>
+              <ion-select-option value="agua">Ponto com Água</ion-select-option>
+              <ion-select-option value="perigo">Zona de Perigo</ion-select-option>
+            </ion-select>
+          </ion-item>
+  
+          <ion-item color="dark">
+            <ion-input 
+              label="Coordenadas" 
+              labelPlacement="floating"
+              [(ngModel)]="novoLocal.coordenadas"
+              placeholder="Ex: N-42, L-18">
+            </ion-input>
+          </ion-item>
+  
+          <ion-item color="dark">
+            <ion-textarea 
+              label="Descrição" 
+              labelPlacement="floating"
+              [(ngModel)]="novoLocal.descricao"
+              placeholder="Descreva o local..."
+              rows="3">
+            </ion-textarea>
+          </ion-item>
+  
+          <div class="button-group">
+            <ion-button expand="block" (click)="salvarLocal()" color="success">
+              SALVAR
+            </ion-button>
+            <ion-button expand="block" (click)="cancelar()" color="medium">
+              CANCELAR
+            </ion-button>
+          </div>
+        </ion-card-content>
+      </ion-card>
+  
+      <ion-card *ngFor="let local of locais" class="item-card">
+        <ion-card-content>
+          <div class="item-header">
+            <div class="item-content">
+              <div class="item-title">
+                <ion-icon name="location-outline"></ion-icon>
+                <h3>{{ local.nome }}</h3>
+              </div>
+              <p *ngIf="local.tipo" class="item-info">Tipo: {{ getTipoLabel(local.tipo) }}</p>
+              <p *ngIf="local.coordenadas" class="item-info">Coord: {{ local.coordenadas }}</p>
+              <p *ngIf="local.descricao" class="item-description">{{ local.descricao }}</p>
+            </div>
+            <ion-button 
+              fill="clear" 
+              color="danger" 
+              (click)="removerLocal(local.id)">
+              <ion-icon name="trash-outline"></ion-icon>
+            </ion-button>
+          </div>
+        </ion-card-content>
+      </ion-card>
+  
+      <div *ngIf="locais.length === 0 && !mostrarFormulario" class="empty-state">
+        <ion-icon name="location-outline" class="empty-icon"></ion-icon>
+        <p>Nenhum local mapeado</p>
+        <p class="empty-subtitle">Registre o primeiro local importante</p>
+      </div>
+    </div>
+  </ion-content>

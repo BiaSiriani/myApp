@@ -1,0 +1,241 @@
+ion-content {
+    --background: #18181b;
+  }
+  
+  .terminal-title {
+    font-family: 'Courier New', monospace;
+    
+    &.danger .title-container {
+      h2 {
+        color: #ef4444;
+      }
+      p {
+        color: #dc2626;
+      }
+    }
+    
+    .title-container {
+      text-align: center;
+      
+      h2 {
+        margin: 0;
+        font-size: 1.2rem;
+        font-weight: bold;
+        letter-spacing: 1px;
+      }
+      
+      p {
+        margin: 4px 0 0;
+        font-size: 0.7rem;
+      }
+    }
+  }
+  
+  .page-container {
+    padding: 16px;
+    padding-bottom: 80px;
+    font-family: 'Courier New', monospace;
+  }
+  
+  .add-button {
+    &.danger {
+      --background: #ef4444;
+      --background-hover: #dc2626;
+    }
+    --color: #000;
+    font-weight: bold;
+    margin-bottom: 16px;
+    height: 50px;
+  }
+  
+  .form-card {
+    background: #27272a;
+    margin-bottom: 16px;
+    
+    &.danger {
+      border: 2px solid #ef4444;
+      box-shadow: 0 0 15px rgba(239, 68, 68, 0.3);
+      
+      .danger-item {
+        --border-color: #ef4444;
+        --color: #ef4444;
+        --placeholder-color: #dc2626;
+      }
+    }
+    
+    ion-item {
+      --background: #18181b;
+      margin-bottom: 12px;
+    }
+    
+    .button-group {
+      display: flex;
+      gap: 8px;
+      margin-top: 16px;
+      
+      ion-button {
+        font-weight: bold;
+      }
+    }
+  }
+  
+  .item-card {
+    background: #27272a;
+    margin-bottom: 12px;
+    transition: all 0.3s ease;
+    
+    &.nivel-baixo {
+      border: 2px solid #eab308;
+      box-shadow: 0 0 10px rgba(234, 179, 8, 0.2);
+      
+      .item-title ion-icon,
+      .item-title h3 {
+        color: #eab308;
+      }
+      
+      .nivel-badge {
+        color: #eab308;
+        font-weight: bold;
+      }
+    }
+    
+    &.nivel-medio {
+      border: 2px solid #f97316;
+      box-shadow: 0 0 10px rgba(249, 115, 22, 0.2);
+      
+      .item-title ion-icon,
+      .item-title h3 {
+        color: #f97316;
+      }
+      
+      .nivel-badge {
+        color: #f97316;
+        font-weight: bold;
+      }
+    }
+    
+    &.nivel-alto {
+      border: 2px solid #ef4444;
+      box-shadow: 0 0 10px rgba(239, 68, 68, 0.2);
+      
+      .item-title ion-icon,
+      .item-title h3 {
+        color: #ef4444;
+      }
+      
+      .nivel-badge {
+        color: #ef4444;
+        font-weight: bold;
+      }
+    }
+    
+    &.nivel-critico {
+      border: 2px solid #b91c1c;
+      box-shadow: 0 0 20px rgba(185, 28, 28, 0.5);
+      animation: pulse-danger 2s ease-in-out infinite;
+      
+      .item-title ion-icon,
+      .item-title h3 {
+        color: #ef4444;
+      }
+      
+      .nivel-badge {
+        color: #ef4444;
+        font-weight: bold;
+        text-transform: uppercase;
+        animation: pulse 1s ease-in-out infinite;
+      }
+    }
+    
+    .item-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      
+      .item-content {
+        flex: 1;
+        
+        .item-title {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          margin-bottom: 8px;
+          
+          ion-icon {
+            font-size: 1.5rem;
+          }
+          
+          h3 {
+            margin: 0;
+            font-size: 1.1rem;
+            font-weight: bold;
+          }
+        }
+        
+        .nivel-badge {
+          margin: 4px 0;
+          font-size: 0.9rem;
+          text-transform: uppercase;
+        }
+        
+        .item-info {
+          margin: 4px 0;
+          font-size: 0.85rem;
+          color: #86efac;
+        }
+        
+        .item-description {
+          margin: 8px 0 0;
+          font-size: 0.85rem;
+          color: #d1d5db;
+          line-height: 1.4;
+        }
+      }
+    }
+  }
+  
+  .empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    border-radius: 8px;
+    margin-top: 40px;
+    
+    &.danger {
+      color: #dc2626;
+      border: 2px dashed #dc2626;
+    }
+    
+    .empty-icon {
+      font-size: 4rem;
+      opacity: 0.5;
+      margin-bottom: 16px;
+    }
+    
+    p {
+      margin: 8px 0;
+      font-size: 1rem;
+    }
+    
+    .empty-subtitle {
+      font-size: 0.85rem;
+      opacity: 0.7;
+    }
+  }
+  
+  @keyframes pulse-danger {
+    0%, 100% {
+      box-shadow: 0 0 20px rgba(185, 28, 28, 0.5);
+    }
+    50% {
+      box-shadow: 0 0 30px rgba(185, 28, 28, 0.8);
+    }
+  }
+  
+  @keyframes pulse {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.7;
+    }
+  }

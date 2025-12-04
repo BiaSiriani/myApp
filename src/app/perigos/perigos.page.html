@@ -1,0 +1,116 @@
+<ion-header [translucent]="true">
+    <ion-toolbar color="dark">
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="/home" text="" color="danger"></ion-back-button>
+      </ion-buttons>
+      <ion-title class="terminal-title danger">
+        <div class="title-container">
+          <h2>PERIGOS E CRIATURAS</h2>
+          <p>{{ perigos.length }} ameaças registradas</p>
+        </div>
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content [fullscreen]="true" color="dark">
+    <div class="page-container">
+      <ion-button 
+        *ngIf="!mostrarFormulario"
+        expand="block" 
+        (click)="toggleFormulario()" 
+        class="add-button danger">
+        <ion-icon name="add-circle-outline" slot="start"></ion-icon>
+        REGISTRAR PERIGO
+      </ion-button>
+  
+      <ion-card *ngIf="mostrarFormulario" class="form-card danger">
+        <ion-card-content>
+          <ion-item color="dark" class="danger-item">
+            <ion-input 
+              label="Nome do perigo/criatura" 
+              labelPlacement="floating"
+              [(ngModel)]="novoPerigo.nome"
+              placeholder="Ex: Robô de Segurança">
+            </ion-input>
+          </ion-item>
+  
+          <ion-item color="dark" class="danger-item">
+            <ion-select 
+              label="Nível de perigo" 
+              labelPlacement="floating"
+              [(ngModel)]="novoPerigo.nivel"
+              interface="action-sheet">
+              <ion-select-option value="baixo">Nível: Baixo</ion-select-option>
+              <ion-select-option value="medio">Nível: Médio</ion-select-option>
+              <ion-select-option value="alto">Nível: Alto</ion-select-option>
+              <ion-select-option value="critico">Nível: CRÍTICO</ion-select-option>
+            </ion-select>
+          </ion-item>
+  
+          <ion-item color="dark" class="danger-item">
+            <ion-select 
+              label="Tipo de ameaça" 
+              labelPlacement="floating"
+              [(ngModel)]="novoPerigo.tipo"
+              interface="action-sheet">
+              <ion-select-option value="maquina">Máquina Descontrolada</ion-select-option>
+              <ion-select-option value="predador">Predador Urbano</ion-select-option>
+              <ion-select-option value="quimico">Agente Químico</ion-select-option>
+              <ion-select-option value="estrutural">Zona Instável</ion-select-option>
+              <ion-select-option value="desconhecido">Ruído Suspeito</ion-select-option>
+            </ion-select>
+          </ion-item>
+  
+          <ion-item color="dark" class="danger-item">
+            <ion-textarea 
+              label="Descrição da ameaça" 
+              labelPlacement="floating"
+              [(ngModel)]="novoPerigo.descricao"
+              placeholder="Descreva o perigo..."
+              rows="3">
+            </ion-textarea>
+          </ion-item>
+  
+          <div class="button-group">
+            <ion-button expand="block" (click)="salvarPerigo()" color="danger">
+              SALVAR
+            </ion-button>
+            <ion-button expand="block" (click)="cancelar()" color="medium">
+              CANCELAR
+            </ion-button>
+          </div>
+        </ion-card-content>
+      </ion-card>
+  
+      <ion-card *ngFor="let perigo of perigos" [class]="'item-card nivel-' + perigo.nivel">
+        <ion-card-content>
+          <div class="item-header">
+            <div class="item-content">
+              <div class="item-title">
+                <ion-icon name="warning-outline"></ion-icon>
+                <h3>{{ perigo.nome }}</h3>
+              </div>
+              <p class="nivel-badge">
+                <span *ngIf="perigo.nivel === 'critico'">⚠ CRÍTICO ⚠</span>
+                <span *ngIf="perigo.nivel !== 'critico'">Nível: {{ getNivelLabel(perigo.nivel) }}</span>
+              </p>
+              <p *ngIf="perigo.tipo" class="item-info">Tipo: {{ getTipoLabel(perigo.tipo) }}</p>
+              <p *ngIf="perigo.descricao" class="item-description">{{ perigo.descricao }}</p>
+            </div>
+            <ion-button 
+              fill="clear" 
+              color="danger" 
+              (click)="removerPerigo(perigo.id)">
+              <ion-icon name="trash-outline"></ion-icon>
+            </ion-button>
+          </div>
+        </ion-card-content>
+      </ion-card>
+  
+      <div *ngIf="perigos.length === 0 && !mostrarFormulario" class="empty-state danger">
+        <ion-icon name="warning-outline" class="empty-icon"></ion-icon>
+        <p>Nenhuma ameaça registrada</p>
+        <p class="empty-subtitle">Documente perigos encontrados</p>
+      </div>
+    </div>
+  </ion-content>

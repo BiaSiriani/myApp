@@ -35,3 +35,34 @@
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import "@ionic/angular/css/palettes/dark.system.css";
+/* Tema Retro Pós-Apocalíptico */
+* {
+    font-family: 'Courier New', Courier, monospace;
+  }
+  
+  ion-toolbar {
+    --background: #000;
+    --border-color: #22c55e;
+  }
+  
+  ion-back-button {
+    --color: #22c55e;
+  }
+  
+  /* Scrollbar personalizada */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: #18181b;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: #22c55e;
+    border-radius: 4px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: #16a34a;
+  }

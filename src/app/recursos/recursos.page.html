@@ -1,0 +1,98 @@
+<ion-header [translucent]="true">
+    <ion-toolbar color="dark">
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="/home" text="" color="success"></ion-back-button>
+      </ion-buttons>
+      <ion-title class="terminal-title">
+        <div class="title-container">
+          <h2>RECURSOS ENCONTRADOS</h2>
+          <p>{{ recursos.length }} itens catalogados</p>
+        </div>
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content [fullscreen]="true" color="dark">
+    <div class="page-container">
+      <!-- Botão Adicionar -->
+      <ion-button 
+        *ngIf="!mostrarFormulario"
+        expand="block" 
+        (click)="toggleFormulario()" 
+        class="add-button">
+        <ion-icon name="add-circle-outline" slot="start"></ion-icon>
+        ADICIONAR RECURSO
+      </ion-button>
+  
+      <!-- Formulário -->
+      <ion-card *ngIf="mostrarFormulario" class="form-card">
+        <ion-card-content>
+          <ion-item color="dark">
+            <ion-input 
+              label="Nome do recurso" 
+              labelPlacement="floating"
+              [(ngModel)]="novoRecurso.nome"
+              placeholder="Ex: Fragmentos metálicos">
+            </ion-input>
+          </ion-item>
+  
+          <ion-item color="dark">
+            <ion-input 
+              label="Quantidade" 
+              labelPlacement="floating"
+              [(ngModel)]="novoRecurso.quantidade"
+              placeholder="Ex: 15 unidades">
+            </ion-input>
+          </ion-item>
+  
+          <ion-item color="dark">
+            <ion-textarea 
+              label="Descrição" 
+              labelPlacement="floating"
+              [(ngModel)]="novoRecurso.descricao"
+              placeholder="Descreva o recurso encontrado..."
+              rows="3">
+            </ion-textarea>
+          </ion-item>
+  
+          <div class="button-group">
+            <ion-button expand="block" (click)="salvarRecurso()" color="success">
+              SALVAR
+            </ion-button>
+            <ion-button expand="block" (click)="cancelar()" color="medium">
+              CANCELAR
+            </ion-button>
+          </div>
+        </ion-card-content>
+      </ion-card>
+  
+      <!-- Lista de Recursos -->
+      <ion-card *ngFor="let recurso of recursos" class="item-card">
+        <ion-card-content>
+          <div class="item-header">
+            <div class="item-content">
+              <div class="item-title">
+                <ion-icon name="cube-outline"></ion-icon>
+                <h3>{{ recurso.nome }}</h3>
+              </div>
+              <p *ngIf="recurso.quantidade" class="item-info">Quantidade: {{ recurso.quantidade }}</p>
+              <p *ngIf="recurso.descricao" class="item-description">{{ recurso.descricao }}</p>
+            </div>
+            <ion-button 
+              fill="clear" 
+              color="danger" 
+              (click)="removerRecurso(recurso.id)">
+              <ion-icon name="trash-outline"></ion-icon>
+            </ion-button>
+          </div>
+        </ion-card-content>
+      </ion-card>
+  
+      <!-- Mensagem vazia -->
+      <div *ngIf="recursos.length === 0 && !mostrarFormulario" class="empty-state">
+        <ion-icon name="cube-outline" class="empty-icon"></ion-icon>
+        <p>Nenhum recurso catalogado</p>
+        <p class="empty-subtitle">Adicione o primeiro item encontrado</p>
+      </div>
+    </div>
+  </ion-content>

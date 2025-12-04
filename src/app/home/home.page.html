@@ -1,20 +1,76 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
+  <ion-toolbar color="dark">
+    <ion-title class="terminal-title">
+      <div class="title-container">
+        <h1>DIÁRIO DE RECONSTRUÇÃO</h1>
+        <p class="subtitle">Sistema de Catalogação v2.0.47</p>
+        <p class="operator">Operador: FAÍSCA</p>
+      </div>
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content [fullscreen]="true" color="dark">
+  <!-- Stats Bar -->
+  <div class="stats-bar">
+    <div class="stat-item">
+      <div class="stat-number">{{ recursos.length }}</div>
+      <div class="stat-label">RECURSOS</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">{{ locais.length }}</div>
+      <div class="stat-label">LOCAIS</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">{{ perigos.length }}</div>
+      <div class="stat-label">PERIGOS</div>
+    </div>
+  </div>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+  <!-- Menu Grid -->
+  <div class="menu-container">
+    <ion-card class="menu-card recursos-card" (click)="navegarPara('/recursos')">
+      <ion-card-content>
+        <div class="card-header">
+          <ion-icon name="cube-outline" class="card-icon"></ion-icon>
+          <div class="card-text">
+            <h2>RECURSOS ENCONTRADOS</h2>
+            <p>Itens e materiais coletados</p>
+          </div>
+          <div class="arrow">→</div>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card class="menu-card locais-card" (click)="navegarPara('/locais')">
+      <ion-card-content>
+        <div class="card-header">
+          <ion-icon name="location-outline" class="card-icon"></ion-icon>
+          <div class="card-text">
+            <h2>LOCAIS IMPORTANTES</h2>
+            <p>Mapa de áreas mapeadas</p>
+          </div>
+          <div class="arrow">→</div>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card class="menu-card perigos-card" (click)="navegarPara('/perigos')">
+      <ion-card-content>
+        <div class="card-header">
+          <ion-icon name="warning-outline" class="card-icon"></ion-icon>
+          <div class="card-text">
+            <h2>PERIGOS E CRIATURAS</h2>
+            <p>Ameaças registradas</p>
+          </div>
+          <div class="arrow">→</div>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-text">▮▮▮ SISTEMA OPERACIONAL ▮▮▮</div>
   </div>
 </ion-content>
